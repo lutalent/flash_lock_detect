@@ -20,6 +20,10 @@ if [ -f ${read_file} ]; then
 		result="FAIL"
 		echo "Failed to Read"
 	else
+		xxd ${read_file}
+		echo ""
+		echo ""
+
 		# check the value of the responding offset
 		for OFFSET in $OFFSET_MEM
 		do
