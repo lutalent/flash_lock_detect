@@ -18,18 +18,18 @@ if [ -f ${read_file} ]; then
 	# check if the file is 0kb
 	if [ `stat -c %s ${read_file}` != 32 ];then
 		result="FAIL"
-		echo "FileRead"
+		echo "Failed to Read"
 	else
-	# check the value of the responding offset
-	for OFFSET in $OFFSET_MEM
-	do
-		read_val=`xxd -s ${OFFSET} -l 4 -p ${read_file}`
-		#echo $read_val
-		if [ "${read_val}" == "${offset_val["${OFFSET}"]}" ]; then
-			result="FAIL"
-			break
-		fi
-	done
+		# check the value of the responding offset
+		for OFFSET in $OFFSET_MEM
+		do
+			read_val=`xxd -s ${OFFSET} -l 4 -p ${read_file}`
+			#echo $read_val
+			if [ "${read_val}" == "${offset_val["${OFFSET}"]}" ]; then
+				result="FAIL"
+				break
+			fi
+		done
 	fi
 else
 	echo "No file"
